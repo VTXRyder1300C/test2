@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous">
+    </script>
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    </link>
+    <h:outputStylesheet library="css" name="Styles.css"/>
+    <h:head>
+        <title>Response</title>
+    </h:head>
+    <h:body>
+        <div class="main-Xlong" 
+             style="background-repeat: no-repeat; background-image: url('resources/images/connection.jpg');">
+            <div class="box5">
+                <h:form>
+                    <div style="text-align: center;">
+                        <h2>Total Income</h2>
+                        <h2 style="color:#00FF00;">  $#{users.total}!
+                        </h2>
+                        <h:commandButton  class="btn btn-danger btn-lg download-button" 
+                                          style="margin: 2% 3% 2% 3%;"
+                                          id="back" 
+                                          value="Back" 
+                                          action="Mainpage" />
+                    </div>
+                    <div class="chart">                        
+                        <div id="piechart2">                            
+                        </div>
+                    </div>                    
+                    <h:inputText id="username"
+                                 style="display:none;"
+                                 value="#{users.username}"
+                                 maxlength="25" />
+                    <h:inputText id="userID"
+                                 value="#{users.userID}"
+                                 style="display:none;"
+                                 maxlength="25" />
+                    <p></p>
+                    <div style="height:22rem; overflow: auto;">
+                        <div class="grid-container stickyG"> 
+                            <div class="grid-item"> <h5>Income ID</h5> </div>
+                            <div class="grid-item"> <h5>Date</h5> </div>
+                            <div class="grid-item"> <h5>Category</h5> </div>
+                            <div class="grid-item"> <h5>Amount</h5> </div>
+                            <div class="grid-item"> <h5>Notes</h5> </div></div>
+                        <c:forEach begin="1" end="#{users.countI}">
+                            <div class="grid-container"> 
+                                <c:forEach begin="1" end="5">
+                                    <div class="grid-item"> <h5>#{users.getIncomeTableData()}</h5> </div>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+        <script>
+// Load google charts
+            google.charts.load('current', {'packages': ['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+            function drawChart() {
+                        var count = #{users.getIncomeCategoryCount()};
+                var chartData = [['Category', 'Amount'], ];
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['#{users.getIncomeCategoryNames()}', #{users.getIncomeCategoryTotals()}]);
+                        chartData.push(['other', #{users.getIncomeCategoryTotals()}]);
+
+                var data = google.visualization.arrayToDataTable(chartData);
+                var options = {'width': 700, 'height': 450};
+                var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+                chart.draw(data, options);
+            }
+        </script>
+    </h:body>
+</html>

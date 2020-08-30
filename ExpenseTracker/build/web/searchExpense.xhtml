@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <meta charset="utf-8"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+    <h:outputStylesheet library="css" name="Styles.css"/>
+    <h:head>
+        <title>Search</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body>
+        <div class="main-Xlong" style="background-repeat: no-repeat; background-image: url('resources/images/connection.jpg');">
+            <div class="sticky">
+                <div class="box2">
+                    <h3>You may search by the column of the expense table:</h3>
+                    <h:form>
+                        <h:inputText id="username"
+                                     style="display:none;"
+                                     value="#{users.username}"
+                                     maxlength="25" />
+                        <h:inputText id="userID"
+                                     value="#{users.userID}"
+                                     style="display:none;"
+                                     maxlength="25" />
+                        <p></p>
+                        Search by a specific column within the expense table:
+                        <h:selectOneMenu class="email" 
+                                         value="#{users.expenseSearch1}">
+                            <f:selectItem itemValue="type" itemLabel="type" />
+                            <f:selectItem itemValue="amount" itemLabel="amount" />
+                            <f:selectItem itemValue="notes" itemLabel="notes" />
+                        </h:selectOneMenu>
+                        <p></p>What do you want to find within that column? (Case sensitive)
+                        <h:inputText class="email" 
+                                     id="search2"
+                                     value="#{users.expenseSearch2}"
+                                     maxlength="25" />
+                        <h:selectOneMenu style="display:none" value="#{users.table}">
+                            <f:selectItem itemValue="expenseSearch" itemLabel="search"/>
+                        </h:selectOneMenu>
+                        <p></p>
+                        <h:commandButton class="btn btn-dark btn-lg download-button" style="margin: 3% 3% 0% 0;"
+                                         id="expenseSearch"
+                                         value="Search by category" 
+                                         action="response" />
+                        <br></br>
+                        <h:commandButton class="btn btn-danger btn-lg download-button" style="margin: 3% 3% 0% 0;"
+                                         id="back" 
+                                         value="Back to the main page" 
+                                         action="Mainpage" />
+                    </h:form>    
+                </div>
+                <p></p><p></p>
+                <div class="box2">
+                    <h3>You may search by the date(s) of the expense(s):</h3>
+                    <h:form>
+                        <h:inputText id="username"
+                                     style="display:none;"
+                                     value="#{users.username}"
+                                     maxlength="25" />
+                        <h:inputText id="userID"
+                                     value="#{users.userID}"
+                                     style="display:none;"
+                                     maxlength="25" />
+                        <p></p>
+                        Select the starting date:
+                        <h:inputText styleClass="datepicker"   
+                                     style="pointer-events: none;background-color: lightgray;"
+                                     id="startDate"
+                                     value="#{users.date}"
+                                     required="true"
+                                     requiredMessage="Looks like you forgot a date!"
+                                     maxlength="25" />
+                        <p></p>Select the ending date:
+                        <h:inputText styleClass="datepicker"   
+                                     style="pointer-events: none;background-color: lightgray;"
+                                     id="endDate"
+                                     value="#{users.date2}"
+                                     required="true"
+                                     requiredMessage="Looks like you forgot a date!"
+                                     maxlength="25" />
+                        <h:selectOneMenu style="display:none" value="#{users.table}">
+                            <f:selectItem itemValue="expenseDateSearch" itemLabel="search"/>
+                        </h:selectOneMenu>
+                        <h:commandButton class="btn btn-dark btn-lg download-button" style="margin: 6% 3% 0% 0;"
+                                         id="expenseSearchDate" 
+                                         value="Search by date" 
+                                         action="response" />
+                        <br></br>
+                        <h:commandButton class="btn btn-danger btn-lg download-button" style="margin: 3% 3% 0% 0;"
+                                         id="back" 
+                                         value="Back to the main page" 
+                                         action="Mainpage" />
+                    </h:form>   
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $(".datepicker").datepicker({
+                    dateFormat: 'yy/mm/dd',
+                    showOn: "button",
+                    buttonText: "Select date"})
+            });
+        </script>
+    </body>
+</html>

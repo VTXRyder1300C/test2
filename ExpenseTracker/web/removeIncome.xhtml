@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"></link>
+    <h:outputStylesheet library="css" name="Styles.css"/>
+    <h:head>
+        <title>Remove Expense</title>
+    </h:head>
+    <h:body>
+        <div class="main-Xlong" style="background-repeat: no-repeat; background-image: url('resources/images/connection.jpg');">
+            <div style="text-align: center;" class="box5"> 
+                <h:form>
+                    <p></p>
+                    <h:inputText id="username"
+                                 value="#{users.username}"
+                                 required="false"
+                                 requiredMessage="Please enter something."
+                                 maxlength="25" 
+                                 style="display:none"/>
+
+                    <h:inputText style="display:none;"
+                                 id="USERID"
+                                 value="#{users.userID}"
+                                 required="true"
+                                 requiredMessage="Please enter something."
+                                 maxlength="25" />
+                    <p></p>
+                    <h4>Select the income ID of the income to remove</h4>
+                    <h:selectOneMenu class="selectNumber checkedGreen" value="#{users.incomeID}">
+                        <c:forEach begin="1" end="#{users.incomeIDCount}">
+                            <f:selectItem itemValue="#{users.allIncomeIDs}"/>
+                        </c:forEach>
+                    </h:selectOneMenu> 
+                    <p></p>
+                    <h:selectOneMenu style="display:none" value="#{users.table}">
+                        <f:selectItem itemValue="removeIncome"  itemLabel="Remove"/>
+                    </h:selectOneMenu> 
+                    <p></p>
+                    <h:commandButton class="btn btn-lg btn-dark download-button" 
+                                     id="submit" 
+                                     style="margin: 0 0 0 0;"
+                                     value="Remove from the database" 
+                                     action="Mainpage" />
+                </h:form>
+                <h:form>
+                    <h:inputText id="userID"
+                                 value="#{users.userID}"
+                                 style="display:none;"
+                                 maxlength="25" />
+                    <h:inputText id="username"
+                                 style="display:none;"
+                                 value="#{users.username}"
+                                 maxlength="25" />
+                    <h:commandButton class="btn btn-danger btn-lg download-button" 
+                                     id="back" 
+                                     style="margin: 2% 0 5% 0;"
+                                     value="Back to the main page" 
+                                     action="Mainpage" />
+                    <div style="height:22rem; overflow: auto;">
+                        <div class="grid-container stickyG"> 
+                            <div class="grid-item"> <h5>Income ID</h5> </div>
+                            <div class="grid-item"> <h5>Date</h5> </div>
+                            <div class="grid-item"> <h5>Category</h5> </div>
+                            <div class="grid-item"> <h5>Amount</h5> </div>
+                            <div class="grid-item"> <h5>Notes</h5> </div></div>
+                        <c:forEach begin="1" end="#{users.countI}">
+                            <div class="grid-container"> 
+                                <c:forEach begin="1" end="5">
+                                    <div class="grid-item"> <h5>#{users.getIncomeTableData()}</h5> </div>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div style="background-color: springgreen;"><p></p>
+                        <div><h3>Total income</h3></div>
+                        <h2>$#{users.total}</h2></div>
+                </h:form>
+            </div>
+        </div>
+        <script>
+            document.querySelector("select").setAttribute("size", "3");
+            $("option").click(function () {
+                $("option:checked").style = "background: radial-gradient(red,red)"
+            });
+            //document.querySelector("option:checked").style ="background: radial-gradient(red,red);";
+//            $( "option" ).click(function() {
+// document.querySelector("option:checked").style ="background: radial-gradient(red,red);";
+//});
+            // $("option:checked").style ="background: radial-gradient(red,red);";
+        </script>
+    </h:body>
+
+
+</html>

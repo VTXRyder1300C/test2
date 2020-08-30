@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!-- Bootstrap Scripts-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="css/styles.css"></link>
+    <h:outputStylesheet library="css" name="Styles.css"/>
+    <h:head>
+        <title>Main Page</title>
+    </h:head> 
+    <h:body>
+        <div class="main-Xlong" style="background-repeat: no-repeat; background-image: url('resources/images/connection.jpg');background-size: 80rem 70rem;">
+            <div class="box4">
+                <h1>Hi #{users.username}!</h1>
+                <h:form>
+                    <h:selectOneMenu value="#{users.table}" style="display: none">
+                        <f:selectItem itemValue="logout" itemLabel="logout"/>
+                    </h:selectOneMenu>
+                    <h:commandButton class="btn btn-dark btn-lg download-button" id="logOut" value="Logout" 
+                                     action="index" />
+                </h:form>
+                <h3>Your current total is</h3>
+                <div id="positiveMoney" style="display:none; color:#00FF00; font-size: 40px" class="postit"><h2 >error, check javascript</h2></div>
+                <div id="negativeMoney" style="display:none; color:red; font-size: 40px" class="postit"><h2 >error, check javascript</h2></div>
+                <h2 style="display:none; color:red;" id="inserted">Inserted!</h2>
+                <h2 style="display:none; color:red;" id="removeExpenseError">Error, no expense with that ID!</h2>
+                <h2 style="display:none; color:red;" id="removeIncomeError">Error, no income with that ID!</h2>
+                <h2 style="display:none; color:red;" id="removeIncome1">Removed!</h2>
+                <h2 style="display:none; color:red;" id="removeExpense1">Removed!</h2>
+                <br></br>
+                <br/><h4><b>Your tools to manage your money</b></h4>
+                <h:form>
+                    <!--Income-->
+                    <!-- Input texts are needed to pass variables to pages-->
+                    <h:inputText id="username"
+                                 style="display:none;"
+                                 value="#{users.username}"
+                                 maxlength="25" />
+                    <h:inputText id="userID"
+                                 value="#{users.userID}"
+                                 style="display:none;"
+                                 maxlength="25" />
+                    <h:selectOneMenu value="#{users.table}" style="display: none">
+                        <f:selectItem itemValue="income" itemLabel="Display income"/>
+                    </h:selectOneMenu><br/>Manage your income here:<br/>
+                    <h:commandButton class="btn5" id="income2" value="View all your income" 
+                                     action="income" />
+                    <h:commandButton class="btn5" id="insertIncome" value="Add income" 
+                                     action="insertIncome" />
+                    <h:commandButton class="btn5" id="removeIncome" value="Remove income" 
+                                     action="removeIncome" />
+                    <h:commandButton class="btn5" id="SearchIncome" value="Search income" 
+                                     action="searchIncome" />
+                </h:form>
+                <h:form>
+                    <!--Expenses-->
+                    <!-- Input texts are needed to pass variables to pages-->
+                    <h:inputText id="username"
+                                 style="display:none;"
+                                 value="#{users.username}"
+                                 maxlength="25" />
+                    <h:inputText id="userID"
+                                 value="#{users.userID}"
+                                 style="display:none;"
+                                 maxlength="25" />
+                    <p></p>
+                    <h:selectOneMenu value="#{users.table}" style="display: none">
+                        <f:selectItem itemValue="expense" itemLabel="Display expenses"/>
+                    </h:selectOneMenu> <br/>Manage your expenses here:<br/>
+                    <h:commandButton class="btn6" id="expenses" value="View all your expenses" 
+                                     action="expenses" />
+                    <h:commandButton class="btn6" id="insertExpense" value="Add expenses" 
+                                     action="insertExpense" />
+                    <h:commandButton class="btn6" id="removeExpense" value="Remove expenses" 
+                                     action="removeExpense" />
+                    <h:commandButton class="btn6" id="SearchExpense" value="Search expenses" 
+                                     action="searchExpense" />
+                </h:form>
+            </div>
+        </div>
+        <script>
+            var total = #{users.totalMoney};
+            if (#{users.insertSuccess}) {
+                console.log("insert good! " + #{users.insertSuccess});
+                document.getElementById("inserted").style.display = "block";
+            }
+            if (#{users.expenseError}) {
+                document.getElementById("removeExpenseError").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("removeExpenseError").style.display = "none";
+                }, 3000);
+            } else {
+                document.getElementById("removeExpenseError").style.display = "none";
+            }
+            if (#{users.incomeError}) {
+                document.getElementById("removeIncomeError").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("removeIncomeError").style.display = "none";
+                }, 3000);
+            } else {
+                document.getElementById("removeIncomeError").style.display = "none";
+            }
+            if (#{users.incomeRemoved}) {
+                document.getElementById("removeIncome1").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("removeIncome1").style.display = "none";
+                }, 3000);
+            } else {
+                document.getElementById("removeIncome1").style.display = "none";
+            }
+            if (#{users.expenseRemoved}) {
+                document.getElementById("removeExpense1").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("removeExpense1").style.display = "none";
+                }, 3000);
+            } else {
+                document.getElementById("removeExpense1").style.display = "none";
+            }
+            if (total >= 0) {
+                document.getElementById("positiveMoney").style.display = "block";
+                if (total % 1 === 0) {//check for trailing 0's    
+                    document.getElementById("positiveMoney").innerHTML = "$" + total + ".00";
+                } else if ((total * 10) % 1 === 0) {
+                    document.getElementById("positiveMoney").innerHTML = "$" + total + "0";
+                } else {
+                    document.getElementById("positiveMoney").innerHTML = "$" + total;
+                }
+                document.getElementById("negativeMoney").style.display = "none";
+            } else {
+                document.getElementById("positiveMoney").style.display = "none";
+                total *= -1;
+                if (total % 1 === 0) {//check for trailing 0's
+                    document.getElementById("negativeMoney").innerHTML = "-$" + total + ".00";
+                } else if ((total * 10) % 1 === 0) {
+                    document.getElementById("negativeMoney").innerHTML = "-$" + total + "0";
+                } else {
+                    document.getElementById("negativeMoney").innerHTML = "-$" + total;
+                }
+                document.getElementById("negativeMoney").style.display = "block";
+            }
+
+        </script>
+    </h:body>
+</html>
